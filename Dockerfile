@@ -14,10 +14,10 @@ WORKDIR /opt/src
 
 RUN set -x \
     && apk add --no-cache \
-         bash bind-tools coreutils openssl uuidgen wget xl2tpd iproute2 \
-         libcap-ng libcurl libevent linux-pam musl nspr nss nss-tools openrc \
-         bison flex gcc make libc-dev bsd-compat-headers linux-pam-dev \
-         nss-dev libcap-ng-dev libevent-dev curl-dev nspr-dev \
+    bash bind-tools coreutils openssl uuidgen wget xl2tpd iproute2 \
+    libcap-ng libcurl libevent linux-pam musl nspr nss nss-tools openrc \
+    bison flex gcc make libc-dev bsd-compat-headers linux-pam-dev \
+    nss-dev libcap-ng-dev libevent-dev curl-dev nspr-dev \
     && wget -t 3 -T 30 -nv -O libreswan.tar.gz "https://github.com/libreswan/libreswan/archive/v${SWAN_VER}.tar.gz" \
     || wget -t 3 -T 30 -nv -O libreswan.tar.gz "https://download.libreswan.org/libreswan-${SWAN_VER}.tar.gz" \
     && tar xzf libreswan.tar.gz \
@@ -31,8 +31,8 @@ RUN set -x \
     && touch /run/openrc/softlevel \
     && rm -rf "/opt/src/libreswan-${SWAN_VER}" \
     && apk del --no-cache \
-         bison flex gcc make libc-dev bsd-compat-headers linux-pam-dev \
-         nss-dev libcap-ng-dev libevent-dev curl-dev nspr-dev
+    bison flex gcc make libc-dev bsd-compat-headers linux-pam-dev \
+    nss-dev libcap-ng-dev libevent-dev curl-dev nspr-dev
 
 RUN wget -t 3 -T 30 -nv -O /opt/src/ikev2.sh https://github.com/hwdsl2/setup-ipsec-vpn/raw/2039f91151c4a339c57fff221d6b540d523dd262/extras/ikev2setup.sh \
     && chmod +x /opt/src/ikev2.sh \
@@ -40,7 +40,7 @@ RUN wget -t 3 -T 30 -nv -O /opt/src/ikev2.sh https://github.com/hwdsl2/setup-ips
 
 COPY ./run.sh /opt/src/run.sh
 RUN chmod 755 /opt/src/run.sh
-EXPOSE 500/udp 4500/udp
+EXPOSE 500/udp 4500/udp 1701/udp
 CMD ["/opt/src/run.sh"]
 
 ARG BUILD_DATE
